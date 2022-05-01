@@ -39,6 +39,161 @@ A deep understanding of these concepts will provide a strong foundation for buil
 * **Compact (Log Files)** - When data from one or more files is deleted, typically based on the age of data
 * **Source (Kafka)** - A term sometimes used to refer to Kafka clients which are producing data into Kafka, typically in reference to another data store
 * **Sink (Kafka)** - A term sometimes used to refer to Kafka clients which are extracting data from Kafka, typically in reference to another data store
-* **Topic (Kafka) **- A logical construct used to organize and segment datasets within Kafka, similar to how SQL databases use tables
+* **Topic (Kafka)** - A logical construct used to organize and segment datasets within Kafka, similar to how SQL databases use tables
 * **Producer (Kafka)** - An application which is sending data to one or more Kafka Topics.
 * **Consumer (Kafka)** - An application which is receiving data from one or more Kafka Topics.
+
+## Understanding Stream Processing
+
+In computing, a _stream_ is typically thought of as a potentially unbounded sequence.
+
+_Stream Processing_ is the act of performing continual calculations on a potentially endless and constantly evolving source of data.
+
+Stream Processing applications perform calculations on Data Streams. Data Streams consist of a potentially endless stream of _immutable_ data.
+
+Immutable data does not change -- once the data has been placed in the data stream it can never be updated. Another data entry can be placed in the stream that supersedes the previous data entry if necessary.
+
+Data sent to data streams is typically _small, less than 1MB in size_.
+
+The data throughput to data streams is highly variable. Some streams will receive thousands or tens of thousands of records per second, and some will receive one or two records per hour.
+
+[![What Is Stream Processing](https://img.youtube.com/vi/jjE9YDcX8Ps/0.jpg)](https://www.youtube.com/watch?v=jjE9YDcX8Ps)
+
+### Stream Processing
+
+* Stream Processing acts on potentially endless and constantly evolving immutable data contained in data streams.
+* Once data have been placed in a data stream, they cannot be modified. We must place a new record in the stream to override the existing data.
+* Finally, data in data streams is typically less than 1MB in size and the data volume may vary from a few records an hour to thousands of requests per second.
+
+[![What Is An Event](https://img.youtube.com/vi/jI7PhkgOYHk/0.jpg)](https://www.youtube.com/watch?v=jI7PhkgOYHk)
+
+* **Event** – an immutable fact regarding something that occurred within a system. It can not be changed, once created. Data records in the context of data streaming are events.
+* In many SQL databases, it is uncommon to track the history of what values were used for a particular user in the past.
+* **Message Queues** – typically communicate commands to perform an action
+* **Invented Systems** – react to the facts that are indirectly communicated to them, for example, via user clicks
+
+#### QUESTION 1 OF 2
+
+What is an event?
+
+[] A command to a downstream system to perform an action
+
+[x] An immutable fact regarding something that occurred within our software system
+
+[] An aggregated representation of the current state of the system
+
+[] A user click on a button
+
+#### QUESTION 2 OF 2
+
+Which of the following statements about stream processing is true? (may be multiple answers)
+
+[x] Stream processing acts on potentially endless and constantly evolving data
+
+[] The individual events in the data stream are typically larger than 1MB in size
+
+[x] The data in the stream is immutable
+
+[] Streaming data is always in the thousands of events per second
+
+[x] To update an event in a stream, a new record is placed in the stream to override the existing data
+
+## Stream Processing Examples
+
+[![Examples Of Stream Processing](https://img.youtube.com/vi/DhO1Dcm5VoQ/0.jpg)](https://www.youtube.com/watch?v=DhO1Dcm5VoQ)
+
+### Stream Processing Examples
+
+#### Log Analysis
+
+One of the first places many companies use stream processing is in log analysis. Companies often run microservices that constantly produce logs that are full of information that can be mined for:
+
+* User behavior patterns
+* Failure prediction
+* Debugging
+
+These logs generate a tremendous amount of data on an ongoing basis, which can be difficult to then analyze. To solve this issue, each log produced by a microservice becomes an event in a data stream.
+
+Companies then build programs that can analyze and join on the events in these data streams to find insights into the data.
+
+![Log Analysis condenses logs from many servers into a single ordered stream](https://video.udacity-data.com/topher/2019/September/5d6ed1b1_screen-shot-2019-09-03-at-1.48.39-pm/screen-shot-2019-09-03-at-1.48.39-pm.png)
+
+#### Web Analytics
+
+Modern web applications measure almost every action a user takes on their site, for example:
+
+* button clicks
+* Page load times
+* Session duration
+
+The volume of these actions can quickly overwhelm a traditional **data store** (any place you keep data). Ingesting and analyzing this data can be difficult and companies use stream processing to analyze the data as it is generated.
+
+The benefits of this process are:
+
+* it lessens the long-term processing burden for companies because of the smaller dataset
+* provides real-time analysis instead of long-running bath analyses that may only be updated periodically
+
+![Analyzing streaming user events for web analytics](https://video.udacity-data.com/topher/2019/September/5d6f1243_screen-shot-2019-09-03-at-6.23.37-pm/screen-shot-2019-09-03-at-6.23.37-pm.png)
+
+#### Real-Time Pricing
+
+Ride-sharing applications are a great example of data streaming for real-time analysis. They use real-time pricing that adjusts with environmental factors and instantaneous demand.
+
+![Determining ride-share pricing on streaming real-time event data](https://video.udacity-data.com/topher/2019/September/5d6f12a1_screen-shot-2019-09-03-at-6.25.45-pm/screen-shot-2019-09-03-at-6.25.45-pm.png)
+
+#### Stream Processing Examples Recap
+
+Stream Processing is a critical component in a number of familiar technology applications:
+
+* Finding patterns and meaningful data in disparate log messages in a microservices architecture
+* Tracking user engagement in real-time with streaming website analytics
+* Real-time pricing in ride-sharing applications based on demand and environmental conditions
+* Stock buying/selling based on price, news, and social media sentiment
+
+## Stream vs. Batch Processing
+
+[![Contrasting Stream And Batch Processing](https://img.youtube.com/vi/lHPQDWSw7IE/0.jpg)](https://www.youtube.com/watch?v=lHPQDWSw7IE)
+
+### Batch Processing
+
+* Runs on a scheduled basis
+* May run for a longer period of time and write results to a SQL-like store
+* May analyze all historical data at once
+* Typically works with mutable data and data stores
+
+### Stream Processing
+
+* Runs at whatever frequency events are generated
+* Typically runs quickly, updating in-memory aggregates
+* Stream Processing applications may simply emit events themselves, rather than write to an event store
+* Typically analyzes trends over a limited period of time due to data volume
+* Typically analyzes immutable data and data stores
+
+_Batch and Stream processing are not mutually exclusive_. Batch systems can create events to feed into stream processing applications, and similarly, stream processing applications can be part of batch processing analyses.
+
+### Components of a Stream Processing Solution
+
+[![Components Of A Stream Processing Solution](https://img.youtube.com/vi/u8yl2PRXrEg/0.jpg)](https://www.youtube.com/watch?v=u8yl2PRXrEg)
+
+### Streaming Data Store
+
+* May look like a message queue, as is the case with Apache Kafka
+* May look like a SQL store, as is the case with Apache Cassandra
+* Responsible for holding all of the immutable event data in the system
+* Provides guarantee that data is stored ordered according to the time it was produced
+* Provides guarantee that data is produced to consumers in the order it was received
+* Provides guarantee that the events it stores are immutable and unchangeable
+
+### Stream Processing Application and Framework
+
+* Stream Processing applications sit downstream of the data store
+* Stream Processing applications ingest real-time event data from one or more data streams
+* Stream Processing applications aggregate, join, and find differences in data from these streams
+* Common Stream Processing Application Frameworks in use today include:
+
+    * Confluent KSQL
+    * Kafka Streams
+    * Apache Flink
+    * Apache Samza
+    * Apache Spark Structure Streaming
+    * Faust Python Library
