@@ -76,27 +76,27 @@ The data throughput to data streams is highly variable. Some streams will receiv
 
 What is an event?
 
-[] A command to a downstream system to perform an action
+- [ ] A command to a downstream system to perform an action
 
-[x] An immutable fact regarding something that occurred within our software system
+- [x] An immutable fact regarding something that occurred within our software system
 
-[] An aggregated representation of the current state of the system
+- [ ] An aggregated representation of the current state of the system
 
-[] A user click on a button
+- [ ] A user click on a button
 
 #### QUESTION 2 OF 2
 
 Which of the following statements about stream processing is true? (may be multiple answers)
 
-[x] Stream processing acts on potentially endless and constantly evolving data
+- [x] Stream processing acts on potentially endless and constantly evolving data
 
-[] The individual events in the data stream are typically larger than 1MB in size
+- [ ] The individual events in the data stream are typically larger than 1MB in size
 
-[x] The data in the stream is immutable
+- [x] The data in the stream is immutable
 
-[] Streaming data is always in the thousands of events per second
+- [ ] Streaming data is always in the thousands of events per second
 
-[x] To update an event in a stream, a new record is placed in the stream to override the existing data
+- [x] To update an event in a stream, a new record is placed in the stream to override the existing data
 
 ## Stream Processing Examples
 
@@ -197,3 +197,102 @@ _Batch and Stream processing are not mutually exclusive_. Batch systems can crea
     * Apache Samza
     * Apache Spark Structure Streaming
     * Faust Python Library
+
+### Further Optional Reading on Message Queues
+
+[RabbitMQ](https://www.rabbitmq.com/)
+[ActiveMQ](https://activemq.apache.org/)
+
+### Benefits of Stream Processing
+
+[![The Benefits Of Stream Processing](https://img.youtube.com/vi/HuqHnCAGWEQ/0.jpg)](https://www.youtube.com/watch?v=HuqHnCAGWEQ)
+
+* Faster for scenarios where a limited set of recent data is needed
+* More scalable due to distributed nature of storage
+* Provides a useful abstraction that decouples applications from each other
+* Allows one set of data to satisfy many use-cases which may not have been predictable when the dataset was originally created
+* Built-in ability to replay events and observe exactly what occurred, and in what order, provides more opportunities to recover from error states or dig into how a particular result was arrived at
+
+## Review: Stream Processing
+
+### QUESTION 1 OF 5
+
+Which of the following is a stream processing solution? (may be more than one answer)
+
+- [ ] A process which runs once a day and aggregates order data by regional market.
+
+- [x] A process that sends a receipt to a customer as soon as it receives a purchase event
+
+- [x] A process that calculates the total page visits in the last 15 minutes
+
+- [x] A process that raises an alert if a certain number of error logs are produced by an application in the last 5 minutes
+
+- [ ] A process that creates a summary of user activity of the last hour, every hour
+
+### QUESTION 2 OF 5
+
+Which of the following is a batch processing solution? (may be more than one answer)
+
+- [x] A daily process which runs sentiment analysis on customer reviews
+
+- [ ] An asynchronous process that performs fraud detection on customer transactions as they occur
+
+- [ ] A process which keeps a running tally of all orders by department for a rolling window of the past 15 minutes
+
+- [x] A process which pulls metrics from all microservices every 10 seconds and aggregate these metrics into a centralized view
+
+- [ ] A process that calculates an aggregated view of metrics across microservices based on real-time events
+
+### QUESTION 3 OF 5
+
+What are the two components of every stream processing solution?
+
+- [ ] Apache Kafka
+
+- [x] Streaming Data Store
+
+- [ ] Spark Structured Streaming
+
+- [x] Stream Processing Application Framework
+
+### QUESTION 4 OF 5
+
+Which of the following is a benefit of stream processing? (may be more than one answer)
+
+- [x] Faster for scenarios where a limited set of recent data is needed
+
+- [ ] Runs on a scheduled basis
+
+- [x] More scalable due to distributed nature of storage
+
+- [ ] Work directly with SQL stores such as PostgreSQL, Redshift, and MySQL
+
+- [x] Provides a useful abstraction that decouples applications from each other
+
+- [ ] Typically has access to all historical data in summarized form for historical analysis
+
+- [x] Allows one set of data to satisfy many use-cases which may not have been predictable when the dataset was originally created
+
+- [x] The built-in ability to replay events and observe exactly what occurred in order provides more opportunities to recover from error states or dig into how a particular result was arrived at
+
+### QUESTION 5 OF 5
+
+- [ ] Which of the following scenarios are better suited to a traditional SQL Database? (may be more than one answer)
+
+- [x] Performing a calculation across a full historical representation of a dataset
+
+- [ ] Updating a calculation as soon as an event occurs in a system
+
+- [x] Storing mutable data in its most up-to-date form
+
+- [x] Running on-demand exploratory queries from business users
+
+### Key concepts to remember about stream processing
+
+* Stream processing applications consist of a stream data store and a stream processing application framework
+* Stream processing solutions do not operate on a scheduled basis
+* Stream processing solutions provide real-time insights based on event data
+* Stream processing solutions are built around generic data events, allowing for flexibility in data processing and highly scalable applications
+* Batch and stream processing solutions can coexist and feed into each other
+
+
